@@ -1,0 +1,8 @@
+.cardInfoImg{
+    height: 11em;
+    transition: 0.5s;
+}
+
+.cardInfoImg:hover {
+    transform: scale(3.0);
+}
