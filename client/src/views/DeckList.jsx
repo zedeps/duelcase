@@ -65,7 +65,7 @@ const DeckList = () => {
                         </div>
                     </div>
                     <div id="right_column" className="flex flex-col justify-center items-center">
-                        <h1 className= "text-amber-300 font-extrabold text-6xl py-2 px-4 underline w-1/3">Decks</h1>
+                        <h1 className= "text-amber-300 font-extrabold text-6xl py-2 px-4 underline w-1/3 text-center">Decks</h1>
                         <div className="w-3/4 overflow-y-scroll">
                             {decks.map((deck) => (
                                 <div key={deck._id} className="flex justify-between items-center">
