@@ -39,15 +39,15 @@ const ViewDeck = () => {
                         <Link to={`/deck/${id}/edit`} className="bg-amber-500 hover:bg-amber-400 text-black font-bold py-2 px-4 border-b-4 border-amber-700 hover:border-amber-500 rounded">Edit Deck</Link>
                     </div>
                 </div>
-                <div id="body_container" className="flex my-5">
+                <div id="body_container" className="flex my-5 justify-evenly items-center">
                     <div id="column_1" className="flex flex-col justify-start items-center mr-6">
-                        <h2 className="text-2xl font-bold text-amber-200 underline mb-10">{deck.name}</h2>
-                        <div className="border-2 border-amber-600 p-4 rounded-xl w-3/4 mb-8">
+                        <h2 className="text-4xl font-bold text-amber-200 underline mb-10">{deck.name}</h2>
+                        <div className=" w-3/4 mb-8">
                             <h3 className="text-xl text-amber-500 mb-5 ">Details</h3>
                             <p className="text-amber-200 ">{deck.details}</p>
                         </div>
-                        <div className="border-2 border-amber-600 p-4 rounded-xl w-3/4">
-                            <h3 className="text-xl text-amber-500 mb-5">Deck Breakdown</h3>
+                        <div className="  w-3/4">
+                            <h3 className="text-xl text-amber-500 mt-5 mb-5">Deck Breakdown</h3>
                             <p className="text-amber-200">{deck.breakdown}</p>
                         </div>
                     </div>

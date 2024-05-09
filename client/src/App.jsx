@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import './App.css';
 import CreateDeck from './views/CreateDeck';
 import DeckList from './views/DeckList'
@@ -13,6 +13,7 @@ function App() {
     
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={ <Navigate to="/decks"/>} />
           <Route path="/deck/new" element={<CreateDeck />} />
           <Route path="/decks" element={<DeckList/>} />
           <Route path="/deck/:id/view" element={<ViewDeck/>}/>

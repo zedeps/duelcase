@@ -39,6 +39,105 @@ const EditDeck = () => {
             })
     }, [id])
 
+    // Add cards to appropriate deck, then sort depending on deck type. 
+
+    const onNewMaindeck = (addedCard) => {
+        let tempDeck = [...maindeck, addedCard];
+        const sortedTempDeck = tempDeck.sort((a, b) => a.name - b.name || a.frameType.localeCompare(b.frameType))
+        setMaindeck(sortedTempDeck)
+        console.log(maindeck)
+    }
+
+    const onNewExtradeck = (addedCard) => {
+        let tempDeck = [...extradeck, addedCard];
+        const sortedTempDeck = tempDeck.sort((a, b) => a.frameType.localeCompare(b.frameType) || a.level - b.level || a.link - b.link)
+        setExtradeck(sortedTempDeck)
+        console.log(extradeck)
+    }
+
+    const onNewSidedeck = (addedCard) => {
+        let tempDeck = [...sidedeck, addedCard];
+        const sortedTempDeck = tempDeck.sort((a, b) => a.name - b.name || a.frameType.localeCompare(b.frameType) || a.level - b.level)
+        setSidedeck(sortedTempDeck)
+        console.log(sidedeck)
+    }
+
+
+    // Sort deck so only the selected card is at the front of the array. Pop the front, then re-sort - deletes a card. 
+    const onDeleteCard = (targetCard) => {
+        if (maindeck.some((item) => item === targetCard)) {
+            let tempDeck = [...maindeck];
+            let sortedTempDeck = tempDeck.sort((a) => {
+                const id = targetCard.id;
+                if (a.id != id) {
+                    return -1;
+                }
+                if (a.id == id) {
+                    return 1;
+                }
+
+                return 0;
+            })
+            sortedTempDeck.pop();
+            setMaindeck(sortedTempDeck.sort((a, b) => a.name - b.name || a.frameType.localeCompare(b.frameType)))
+        }
+        else if (extradeck.some((item) => item === targetCard)) {
+            let tempDeck = [...extradeck];
+            let sortedTempDeck = tempDeck.sort((a) => {
+                const id = targetCard.id;
+                if (a.id != id) {
+                    return -1;
+                }
+                if (a.id == id) {
+                    return 1;
+                }
+
+                return 0;
+            })
+            sortedTempDeck.pop();
+            setExtradeck(sortedTempDeck.sort((a, b) => a.name > b.name ? 1 : -1))
+        }
+        else if (sidedeck.some((item) => item === targetCard)) {
+            let tempDeck = [...sidedeck];
+            let sortedTempDeck = tempDeck.sort((a) => {
+                const id = targetCard.id;
+                if (a.id != id) {
+                    return -1;
+                }
+                if (a.id == id) {
+                    return 1;
+                }
+
+                return 0;
+            })
+            sortedTempDeck.pop();
+            setSidedeck(sortedTempDeck.sort((a, b) => a.name > b.name ? 1 : -1))
+        }
+    }
+
+    // handles the submission of the state values to the database API.
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        axios.put(`http://localhost:8000/api/decks/${id}`, {
+            name,
+            details,
+            breakdown,
+            maindeck,
+            extradeck,
+            sidedeck
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                navigate("/decks");
+            })
+        // .catch(err => {
+        //     console.log(err);
+        //     setErrors(err.response.data.error)
+        // })
+    }
+
     const handleName = (e) => {
         setName(e.target.value);
         const value = e.target.value.trim();
@@ -103,99 +202,6 @@ const EditDeck = () => {
         setCardView(card)
         setCardViewImage(card.card_images[0].image_url)
 
-    }
-
-    const onNewMaindeck = (addedCard) => {
-        let tempDeck = [...maindeck, addedCard];
-        const sortedTempDeck = tempDeck.sort((a, b) => a.name - b.name || a.frameType.localeCompare(b.frameType))
-        setMaindeck(sortedTempDeck)
-        console.log(maindeck)
-    }
-
-    const onNewExtradeck = (addedCard) => {
-        let tempDeck = [...extradeck, addedCard];
-        const sortedTempDeck = tempDeck.sort((a, b) => a.frameType.localeCompare(b.frameType) || a.level - b.level || a.link - b.link)
-        setExtradeck(sortedTempDeck)
-        console.log(extradeck)
-    }
-
-    const onNewSidedeck = (addedCard) => {
-        let tempDeck = [...sidedeck, addedCard];
-        const sortedTempDeck = tempDeck.sort((a, b) => a.name - b.name || a.frameType.localeCompare(b.frameType) || a.level - b.level)
-        setSidedeck(sortedTempDeck)
-        console.log(sidedeck)
-    }
-
-    const onDeleteCard = (targetCard) => {
-        if (maindeck.some((item) => item === targetCard)) {
-            let tempDeck = [...maindeck];
-            let sortedTempDeck = tempDeck.sort((a) => {
-                const id = targetCard.id;
-                if (a.id != id) {
-                    return -1;
-                }
-                if (a.id == id) {
-                    return 1;
-                }
-
-                return 0;
-            })
-            sortedTempDeck.pop();
-            setMaindeck(sortedTempDeck.sort((a, b) => a.name - b.name || a.frameType.localeCompare(b.frameType)))
-        }
-        else if (extradeck.some((item) => item === targetCard)) {
-            let tempDeck = [...extradeck];
-            let sortedTempDeck = tempDeck.sort((a) => {
-                const id = targetCard.id;
-                if (a.id != id) {
-                    return -1;
-                }
-                if (a.id == id) {
-                    return 1;
-                }
-
-                return 0;
-            })
-            sortedTempDeck.pop();
-            setExtradeck(sortedTempDeck.sort((a, b) => a.name > b.name ? 1 : -1))
-        }
-        else if (sidedeck.some((item) => item === targetCard)) {
-            let tempDeck = [...sidedeck];
-            let sortedTempDeck = tempDeck.sort((a) => {
-                const id = targetCard.id;
-                if (a.id != id) {
-                    return -1;
-                }
-                if (a.id == id) {
-                    return 1;
-                }
-
-                return 0;
-            })
-            sortedTempDeck.pop();
-            setSidedeck(sortedTempDeck.sort((a, b) => a.name > b.name ? 1 : -1))
-        }
-    }
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-        axios.put(`http://localhost:8000/api/decks/${id}`, {
-            name,
-            details,
-            breakdown,
-            maindeck,
-            extradeck,
-            sidedeck
-        })
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-                navigate("/decks");
-            })
-        // .catch(err => {
-        //     console.log(err);
-        //     setErrors(err.response.data.error)
-        // })
     }
 
     const validateForm = () => {
