@@ -211,36 +211,36 @@ const EditDeck = () => {
 
     return (
         <div>
-                <div>
+                <div className='flex flex-col justify-start items-center'>
                     <div id="header_container" className="flex justify-between items-center w-full h-16 p-3 bg-amber-950 border-amber-600 border-2">
                         <h1 className=" font-extrabold text-amber-500 text-3xl">DuelCase - Create Deck</h1>
                         <div className="flex justify-around w-1/5">
                             <Link to={`/decks`} className="bg-amber-500 hover:bg-amber-400 text-black font-bold py-2 px-4 border-b-4 border-amber-700 hover:border-amber-500 rounded">Dashboard</Link>
                         </div>
                     </div>
-                    <div className='flex'>
-                        <div>
-                            <form onSubmit={submitHandler} className='flex flex-col justify-around items-center w-full'>
-                                <div>
+                    <div className='flex w-5/6'>
+                        <div className='w-1/3'>
+                            <form onSubmit={submitHandler} className='flex flex-col justify-center items-center w-full text-center'>
+                                <div className='flex flex-col justify-center items-center w-3/4'>
                                     <label htmlFor="name" className="text-xl text-amber-500 mb-5 "> Deck Name </label>
                                     <input type="text" id='name' value={name} onChange={handleName} className=' w-3/4 p-1 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-amber-500 focus:border-amber-500' />
                                     {formErrors.name ? <p className='text-red-400'>{formErrors.name}</p> : null}
                                 </div>
-                                <div>
+                                <div className='flex flex-col justify-center items-center w-full'>
                                     <label htmlFor="details" className="text-xl text-amber-500 mb-5 "> Deck Details </label>
                                     <textarea value={details} id='details' onChange={handleDetails} className=' w-3/4 p-1 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-amber-500 focus:border-amber-500' />
                                     {formErrors.details ? <p className='text-red-400'>{formErrors.details}</p> : null}
                                 </div>
-                                <div>
+                                <div className='flex flex-col justify-center items-center w-full'>
                                     <label htmlFor="breakdown" className="text-xl text-amber-500 mb-5 "> Deck Breakdown </label>
                                     <textarea type="textfield" id='breakdown' value={breakdown} onChange={handleBreakdown} className=' w-3/4 p-1 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-amber-500 focus:border-amber-500' />
                                     {formErrors.breakdown ? <p className='text-red-400'>{formErrors.breakdown}</p> : null}
                                 </div>
-                                <button type='submit' value="Submit" disabled={!validateForm()} className="bg-amber-500 hover:bg-amber-400 text-black font-bold py-2 px-4 border-b-4 border-amber-700 hover:border-amber-500 rounded"> Submit Deck </button>
+                                <button type='submit' value="Submit" disabled={!validateForm()} className="bg-amber-500 hover:bg-amber-400 text-black font-bold py-2 px-4 border-b-4 border-amber-700 hover:border-amber-500 rounded mt-8"> Submit Deck </button>
 
                             </form>
                         </div>
-                        <div className="flex flex-col justify-start w-4/6">
+                        <div className="flex flex-col justify-start w-1/3">
                             <div id='main_deck'>
                                 <h3 className="text-xl text-amber-500">Main Deck - {maindeck.length} cards</h3>
                                 <div className="flex flex-wrap p-3 mb-4 border-2 border-pink-600 bg-pink-300 rounded-xl">
@@ -266,7 +266,7 @@ const EditDeck = () => {
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div className='w-1/3'>
                             <div id='Card Search' className='flex flex-col justify-center items-center'>
                             <h2 className="text-2xl font-bold text-amber-500  mt-7 py-2 px-4  mb-10">Card Search</h2>
 

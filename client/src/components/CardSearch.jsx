@@ -118,13 +118,13 @@ const CardSearch = (props) => {
 
     return (
         <>
-            <div className=" ml-4 p-4">
+            <div className=" ml-4 p-4 flex flex-col justify-center items-center">
                 <div>
                     <input type="text"
                         placeholder="SEARCH..."
                         onChange={handleSearchChange}
                         value={searchText}
-                        className=' w-3/4 p-1 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-amber-500 focus:border-amber-500'
+                        className=' w-full p-1 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-amber-500 focus:border-amber-500'
                     />
                 </div>
                 <div className=" border-1 border-slate-300 rounded-xl mb-3">
